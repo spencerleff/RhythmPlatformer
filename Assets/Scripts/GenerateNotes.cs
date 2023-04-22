@@ -12,11 +12,13 @@ public class GenerateNotes : MonoBehaviour
     public RawImage bg1;
     public RawImage bg2;
     public Image player;
+    public Image witch;
     public AudioSource music;
     public AudioSource gameOverSound;
     public AudioSource healSound;
     public AudioSource hurtSound;
     public Sprite block;
+    public Sprite floor;
     public Sprite heart_full;
     public Sprite heart_half;
     public Sprite heart_empty;
@@ -41,6 +43,9 @@ public class GenerateNotes : MonoBehaviour
     private float speed = 600f;
     private float ReverseNoteSpeed = 750f;
     static float squareSize = 170f;
+    static float floorWidth = 250f;
+    static float floorHeight = 145f;
+    static float floorScale = 10.25f;
     static float NoteHitboxSize = 95f;
     static float middleOfHitbox = -275f;
     private int nextNoteIndex = 0;
@@ -87,7 +92,7 @@ public class GenerateNotes : MonoBehaviour
         //main melody
         CN(c1, 2245f);
         CN(c3, 2680f);
-        CN(c2, 3490f);
+        CN(c2, 3487f);
         CN(c4, 3890f);
         CN(c3, 4260f);
         CN(c2, 5095f);
@@ -153,7 +158,7 @@ public class GenerateNotes : MonoBehaviour
 
         //second part: quick beats
         CN(c3, 28210f);
-        CN(c3, 28490f);
+        CN(c3, 28485f);
         CN(c2, 28735f);
         CN(c1, 28965f);
         CN(c1, 29180f);
@@ -167,52 +172,51 @@ public class GenerateNotes : MonoBehaviour
         CN(c2, 31060f);
         CN(c2, 31235f);
 
-
-        CN(c3, 31530f);
-        CN(c3, 31755f);
-        CN(c2, 32080f);
-        CN(c1, 32265f);
+        CN(c3, 31498f);
+        CN(c3, 31723f);
+        CN(c2, 32063f);
+        CN(c1, 32258f);
         CN(c1, 32445f);
         CN(c1, 32685f);
         CN(c1, 32855f);
-        CN(c3, 33115f);
-        CN(c3, 33310f);
-        CN(c4, 33670f);
-        CN(c3, 33840f);
-        CN(c1, 34035f);
-        CN(c3, 34345f);
-        CN(c2, 34510f);
+        CN(c3, 33105f);
+        CN(c3, 33300f);
+        CN(c4, 33660f);
+        CN(c3, 33835f);
+        CN(c1, 34030f);
+        CN(c3, 34340f);
+        CN(c2, 34505f);
         
         //long notes section
-        CN(c3, 34730f);
+        CN(c3, 34725f);
         CN(c2, 35320f);
-        CN(c4, 36330f);
-        CN(c4, 36940f);
+        CN(c4, 36325f);
+        CN(c4, 36930f);
 
-        CN(c3, 37930f);
-        CN(c2, 38450f);
+        CN(c3, 37925f);
+        CN(c2, 38460f);
         CN(c4, 39480f);
         CN(c4, 40075f);
 
         CN(c3, 41035f);
-        CN(c2, 41640f);
+        CN(c2, 41645f);
         CN(c4, 42635f);
         CN(c4, 43255f);
 
-        CN(c3, 44245f);
-        CN(c2, 44840f);
+        CN(c3, 44250f);
+        CN(c2, 44843f);
         CN(c4, 45845f);
         CN(c4, 46490f);
 
         //final melody
         CN(c1, 47060f);
         CN(c3, 47500f);
-        CN(c2, 48310f);
-        CN(c4, 48798f);
-        CN(c3, 49120f);
+        CN(c2, 48295f);
+        CN(c4, 48755f);
+        CN(c3, 49105f);
         CN(c2, 49910f);
         CN(c3, 50205f);
-        CN(c1, 50410f);
+        CN(c1, 50420f);
         CN(c2, 50675f);
         CN(c1, 51275f);
         CN(c2, 51470f);
@@ -299,7 +303,7 @@ public class GenerateNotes : MonoBehaviour
                         }
                     }
                 }
-                else if (!inMissAnimation && alreadyHopped) {
+                else if (!inMissAnimation && alreadyHopped && !isLevelCompleted) {
                     GameObject n_obj = null; 
                     for (int i = 0; i < notesList.Count; i++) {
                         n_obj = notesList[i]; 
@@ -312,7 +316,7 @@ public class GenerateNotes : MonoBehaviour
                     }
                 }
 
-                if (!isCurrentlyReversing) {
+                if (!isCurrentlyReversing && !isLevelCompleted) {
                     if (Input.GetKeyDown(control1))
                     {
                         CheckNoteHit(-600);
@@ -336,6 +340,9 @@ public class GenerateNotes : MonoBehaviour
 
     private IEnumerator CompletedLevel()
     {
+        //fade in the exit platform
+        StartCoroutine(LoadInExitPlatform(new Vector2(2300, -300f)));
+
         float startVolume = music.volume;
         float music_fade_duration = 2f;
         float timePassed = 0f;
@@ -364,7 +371,14 @@ public class GenerateNotes : MonoBehaviour
             combo.text = "0";
             combo.color = textColor;
             StartCoroutine(NoteMissAnimation(noteObj));
-            StartCoroutine(ReverseNotes(notesList, noteObj));
+
+            if (nextNoteIndex == 0) {
+                StartCoroutine(ReverseNotes(notesList, noteObj));
+            }
+            else {
+                GameObject prevNote = notesList[nextNoteIndex - 1];
+                StartCoroutine(ReverseNotes(notesList, prevNote));
+            }
         }
     }
 
@@ -615,16 +629,19 @@ public class GenerateNotes : MonoBehaviour
         if (nextNoteObj != null)
         {
             while (nextNoteObj.GetComponent<RectTransform>().anchoredPosition.y <= -300f) {
-                    bg1.uvRect = new Rect(bg1.uvRect.x, bg1.uvRect.y - 0.4f * Time.deltaTime, bg1.uvRect.width, bg1.uvRect.height);
-                    bg2.uvRect = new Rect(bg2.uvRect.x, bg2.uvRect.y - 0.2f * Time.deltaTime, bg2.uvRect.width, bg2.uvRect.height);
+                bg1.uvRect = new Rect(bg1.uvRect.x, bg1.uvRect.y - 0.4f * Time.deltaTime, bg1.uvRect.width, bg1.uvRect.height);
+                bg2.uvRect = new Rect(bg2.uvRect.x, bg2.uvRect.y - 0.2f * Time.deltaTime, bg2.uvRect.width, bg2.uvRect.height);
+
+                //move player to correct position after falling
+                Image noteImage = nextNoteObj.GetComponent<Image>();
+                if (player.rectTransform.anchoredPosition.y < -150) {
+                    player.rectTransform.anchoredPosition += new Vector2(0, (speed / 1.5f) * Time.deltaTime);
+                }
 
                 for (int i = 0; i < notesList.Count; i++)
                 {
-                    Image noteImage = notesList[i].GetComponent<Image>();
+                    noteImage = notesList[i].GetComponent<Image>();
                     noteImage.rectTransform.anchoredPosition += new Vector2(0, ReverseNoteSpeed * Time.deltaTime);
-                    if (player.rectTransform.anchoredPosition.y < -150) {
-                        player.rectTransform.anchoredPosition += new Vector2(0, (speed / 6) * Time.deltaTime);
-                    }
                 }
                 yield return new WaitForSeconds(0.0001f);
             }
@@ -770,10 +787,10 @@ public class GenerateNotes : MonoBehaviour
     private IEnumerator GameWinHopAnimation() {
         Vector2 Frog_Original = player.rectTransform.anchoredPosition;
         Vector2 Frog_New = Frog_Original;
-        Frog_New.x += 2000;
-        float arc = 550f;
+        Frog_New.x += 600;
+        float arc = 275f;
 
-        float duration = 2f;
+        float duration = 1f;
         float t = 0f;
         while (t < duration) {
             float normalizedTime = t / duration;
@@ -784,10 +801,79 @@ public class GenerateNotes : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
-
-        player.gameObject.SetActive(false);
         player.rectTransform.anchoredPosition = Frog_New;
 
+        yield return new WaitForSeconds(0.25f);
+
+        Vector2 Frog_End = Frog_New;
+        Frog_End.x += 1200;
+        arc = 350f;
+        duration = 1f;
+        t = 0f;
+        while (t < duration) {
+            float normalizedTime = t / duration;
+            float height = Mathf.Sin(normalizedTime * Mathf.PI) * arc;
+            Vector2 position = Vector2.Lerp(Frog_New, Frog_End, normalizedTime);
+            position.y += height;
+            player.rectTransform.anchoredPosition = position;
+            t += Time.deltaTime;
+            yield return null;
+        }
+        player.rectTransform.anchoredPosition = Frog_End;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    private IEnumerator LoadInExitPlatform(Vector2 position) {
+        GameObject exitObj = new GameObject("Exit_Platform");
+        Image exitImage = exitObj.AddComponent<Image>();
+        Color endColor = exitImage.color;
+        Color startColor = exitImage.color;
+        endColor.a = 0.47f;
+        startColor.a = 0f;
+        exitImage.color = startColor;
+
+        exitImage.sprite = floor;
+        exitImage.rectTransform.sizeDelta = new Vector2(floorWidth, floorHeight);
+        exitImage.rectTransform.localScale = new Vector3(floorScale, 1, 1);
+        exitImage.rectTransform.anchoredPosition = position;
+        exitObj.transform.SetParent(canvas.transform, false);
+
+        Color witch_endColor = witch.color;
+        Color witch_startColor = new Color(255f, 255f, 255f, 0f);
+        witch.color = witch_startColor;
+        witch.gameObject.SetActive(true);
+
+        //fade in the platform object
+        float t = 0f;
+        float duration = 0.5f;
+        while (t < duration) {
+            t += Time.deltaTime;
+            exitImage.color = Color.Lerp(startColor, endColor, t / duration);
+            witch.color = Color.Lerp(witch_startColor, witch_endColor, t / duration);
+            yield return null;
+        }
+
+        exitImage.color = endColor;
+        witch.color = witch_endColor;
+
+        StartCoroutine(WitchRunAway());
+    }
+    
+    private IEnumerator WitchRunAway() {
+        Vector2 Witch_Original = witch.rectTransform.anchoredPosition;
+        Vector2 Witch_New = Witch_Original;
+        Witch_New.x += 1200f;
+
+        float duration = 1f;
+        float t = 0f;
+        while (t < duration) {
+            float normalizedTime = t / duration;
+            Vector2 position = Vector2.Lerp(Witch_Original, Witch_New, normalizedTime);
+            witch.rectTransform.anchoredPosition = position;
+            t += Time.deltaTime;
+            yield return null;
+        }
+        witch.rectTransform.anchoredPosition = Witch_New;
     }
 }

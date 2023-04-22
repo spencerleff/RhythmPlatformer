@@ -87,7 +87,7 @@ public class RollCredits : MonoBehaviour
             else if (title.text == "Assets")
             {
                 isShowingCredit = true;
-                StartCoroutine(ShowCredit("Music", "Potsu - Letting Go\nPotsu - Breakfast\nSuper Mario 64 - Game Over\nStardew Valley - Cloud Country\nPokemon Pearl - Rival Battle Theme\nMinecraft - Player Hurt\nMinecraft - Water Bucket"));
+                StartCoroutine(ShowCredit("Music", "Potsu - Letting Go\nPotsu - Breakfast\nSuper Mario 64 - Game Over\nStardew Valley - Cloud Country\nPokemon Pearl - Team Galactic Building\nPokemon Pearl - Rival Battle\nMinecraft - Player Hurt\nMinecraft - Water Bucket"));
             }
             else if (title.text == "Music")
             {

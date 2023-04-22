@@ -8,7 +8,6 @@ using TMPro;
 public class Outro_Cutscene_Logic : MonoBehaviour
 {
     public Image character;
-    public Image carrots;
     public GameObject dialogue_panel;
     public TextMeshProUGUI char_name;
     public TextMeshProUGUI textbox;
@@ -18,7 +17,7 @@ public class Outro_Cutscene_Logic : MonoBehaviour
     private string[] sentences;
     private int counter = 0;
     private int total = 1;
-    private float textSpeed = 0.03f;
+    private float textSpeed = 0.04f;
 
     void Start()
     {
@@ -76,9 +75,7 @@ public class Outro_Cutscene_Logic : MonoBehaviour
 
     private IEnumerator FrogAnimation() {
         Vector2 Frog_Original = new Vector2(3400f, 235f);
-        Vector2 Frog_New = new Vector2(2150f, 235f);
-        Vector2 Carrots_Original = new Vector2(3500, 235f);
-        Vector2 Carrots_New = new Vector2(2263f, 235f);
+        Vector2 Frog_New = new Vector2(2300f, 235f);
 
         float arc = 500;
 
@@ -93,18 +90,11 @@ public class Outro_Cutscene_Logic : MonoBehaviour
             float z = Mathf.Sin(normalizedTime * Mathf.PI) * arc;
             Vector2 Frog_Pos = new Vector2(x, y + z);
 
-            float cx = Mathf.Lerp(Carrots_Original.x, Carrots_New.x, normalizedTime);
-            float cy = Mathf.Lerp(Carrots_Original.y, Carrots_New.y, normalizedTime);
-            float cz = Mathf.Sin(normalizedTime * Mathf.PI) * arc;
-            Vector2 Carrots_Pos = new Vector2(cx, cy + cz);
-
             character.rectTransform.position = Frog_Pos;
-            carrots.rectTransform.position = Carrots_Pos;
             yield return null;
         }
 
         character.rectTransform.position = Frog_New;
-        carrots.rectTransform.position = Carrots_New;
 
         yield return new WaitForSeconds(3f);
 

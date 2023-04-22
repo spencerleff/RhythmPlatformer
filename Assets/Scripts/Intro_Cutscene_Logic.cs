@@ -10,6 +10,7 @@ public class Intro_Cutscene_Logic : MonoBehaviour
     public Image character;
     public Image witch;
     public Image carrots;
+    public Image witch_with_carrots;
     public GameObject dialogue_panel;
     public TextMeshProUGUI char_name;
     public TextMeshProUGUI textbox;
@@ -152,10 +153,8 @@ public class Intro_Cutscene_Logic : MonoBehaviour
     }
 
     private IEnumerator WitchAnimation() {
-        Vector2 Carrots_Original = new Vector2(267f, 203f);
-        Vector2 Carrots_New = new Vector2(4000f, 720f);
         Vector2 Witch_Original = new Vector2(2780f, 720f);
-        Vector2 Witch_New = new Vector2(400f, carrots.rectTransform.position.y);
+        Vector2 Witch_New = new Vector2(carrots.rectTransform.position.x - 10f, carrots.rectTransform.position.y + 75f);
         Vector2 Witch_End = new Vector2(4133f, 720f);
 
         float arc = 100f;
@@ -176,9 +175,12 @@ public class Intro_Cutscene_Logic : MonoBehaviour
         }
 
         witch.rectTransform.position = Witch_New;
+        witch.gameObject.SetActive(false);
+        carrots.gameObject.SetActive(false);
+        witch_with_carrots.gameObject.SetActive(true);
 
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.75f);
 
         arc = 250f;
 
@@ -192,18 +194,11 @@ public class Intro_Cutscene_Logic : MonoBehaviour
             float z = Mathf.Sin(normalizedTime * Mathf.PI) * arc;
             Vector2 Witch_Pos = new Vector2(x, y + z);
 
-            float cx = Mathf.Lerp(Carrots_Original.x, Carrots_New.x, normalizedTime);
-            float cy = Mathf.Lerp(Carrots_Original.y, Carrots_New.y, normalizedTime);
-            float cz = Mathf.Sin(normalizedTime * Mathf.PI) * arc;
-            Vector2 Carrot_Pos = new Vector2(cx, cy + cz);
-
-            witch.rectTransform.position = Witch_Pos;
-            carrots.rectTransform.position = Carrot_Pos;
+            witch_with_carrots.rectTransform.position = Witch_Pos;
             yield return null;
         }
 
-        witch.rectTransform.position = Witch_End;
-        carrots.rectTransform.position = Carrots_New;
+        witch_with_carrots.rectTransform.position = Witch_End;
 
         char_name.text = names[counter];
         StartCoroutine(ShowText(sentences[counter]));

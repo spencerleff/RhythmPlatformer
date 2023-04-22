@@ -36,5 +36,6 @@ public class DefaultControls : MonoBehaviour
         PlayerPrefs.SetInt("Health", 6);
         PlayerPrefs.SetInt("PauseActive", 0);
         PlayerPrefs.SetInt("CountdownActive", 0);
+        PlayerPrefs.SetInt("Boss_fight_introduction_complete", 0);
     }
 }
