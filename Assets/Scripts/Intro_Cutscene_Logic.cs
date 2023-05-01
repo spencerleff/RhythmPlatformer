@@ -26,7 +26,7 @@ public class Intro_Cutscene_Logic : MonoBehaviour
     private int counter = 0;
     private int total = 4;
     private float textSpeed = 0.03f;
-    private bool canContinue = true;
+    private bool canContinue = false;
 
     void Start()
     {
@@ -207,12 +207,12 @@ public class Intro_Cutscene_Logic : MonoBehaviour
 
     private IEnumerator FrogAnimation() {
         Vector2 Frog_Original = new Vector2(841f, 291f);
-        Vector2 Frog_New = new Vector2(1541f, 291f);
+        Vector2 Frog_New = new Vector2(2150f, 291f);
 
         float arc = 400f;
 
         float t = 0f;
-        float duration = 1.4f;
+        float duration = 1.5f;
         while (t < duration) {
             t += Time.deltaTime;
             float normalizedTime = t / duration;
@@ -228,34 +228,12 @@ public class Intro_Cutscene_Logic : MonoBehaviour
 
         character.rectTransform.position = Frog_New;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.25f);
 
         Frog_Original = Frog_New;
-        Frog_New = new Vector2(2241f, 291f);
+        Frog_New = new Vector2(3400f, 291f);
 
         t = 0f;
-                while (t < duration) {
-            t += Time.deltaTime;
-            float normalizedTime = t / duration;
-
-            float x = Mathf.Lerp(Frog_Original.x, Frog_New.x, normalizedTime);
-            float y = Mathf.Lerp(Frog_Original.y, Frog_New.y, normalizedTime);
-            float z = Mathf.Sin(normalizedTime * Mathf.PI) * arc;
-            Vector2 Frog_Pos = new Vector2(x, y + z);
-
-            character.rectTransform.position = Frog_Pos;
-            yield return null;
-        }
-
-        character.rectTransform.position = Frog_New;
-
-        yield return new WaitForSeconds(0.2f);
-
-        Frog_Original = Frog_New;
-        Frog_New = new Vector2(4133f, 291f);
-
-        t = 0f;
-        duration = 1f;
         while (t < duration) {
             t += Time.deltaTime;
             float normalizedTime = t / duration;

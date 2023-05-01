@@ -12,6 +12,7 @@ public class Outro_Cutscene_Logic : MonoBehaviour
     public TextMeshProUGUI char_name;
     public TextMeshProUGUI textbox;
     public AudioSource intro_music;
+    public Sprite extreme_character;
 
     private string[] names;
     private string[] sentences;
@@ -23,6 +24,10 @@ public class Outro_Cutscene_Logic : MonoBehaviour
     {
         intro_music.volume = PlayerPrefs.GetFloat("Volume");
         intro_music.Play();
+
+        if (PlayerPrefs.GetInt("Extreme_Active") == 1) {
+            character.sprite = extreme_character;
+        }
 
         names = new string[total];
         sentences = new string[total];
@@ -96,7 +101,7 @@ public class Outro_Cutscene_Logic : MonoBehaviour
 
         character.rectTransform.position = Frog_New;
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

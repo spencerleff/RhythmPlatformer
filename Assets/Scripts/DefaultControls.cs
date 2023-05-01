@@ -27,6 +27,10 @@ public class DefaultControls : MonoBehaviour
             PlayerPrefs.SetInt("Control4", (int)KeyCode.K);
         }
 
+        if(!PlayerPrefs.HasKey("Extreme_Active")) {
+            PlayerPrefs.SetInt("Extreme_Active", 0);
+        }
+
         //initial volume slider value is 1
         if(!PlayerPrefs.HasKey("Volume"))
         {

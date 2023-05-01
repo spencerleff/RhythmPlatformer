@@ -745,11 +745,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 660339658}
-  carrots: {fileID: 0}
   dialogue_panel: {fileID: 1844794038}
   char_name: {fileID: 1698252574}
   textbox: {fileID: 1008900891}
   intro_music: {fileID: 1393344603}
+  extreme_character: {fileID: 21300000, guid: ca97b4edb0d134c1587eefe7a4704e04, type: 3}
 --- !u!1 &1393344602
 GameObject:
   m_ObjectHideFlags: 0

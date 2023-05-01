@@ -33,6 +33,7 @@ public class Fight_Intro_Cutscene : MonoBehaviour
     void Start()
     {
         PlayerPrefs.SetInt("Boss_fight_introduction_complete", 0);
+        PlayerPrefs.SetInt("CountdownActive", 1);
         intro_music.volume = PlayerPrefs.GetFloat("Volume");
         intro_music.Play();
         StartCoroutine(Frog_Entry());
@@ -196,10 +197,13 @@ public class Fight_Intro_Cutscene : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(1.75f);
+        yield return new WaitForSeconds(1.6f);
 
         t = 0f;
         fadeInDuration = 1.45f;
+
+        float startVolume = intro_music.volume;
+        float endVolume = 0.0f;
 
         while (t < fadeInDuration)
         {
@@ -209,6 +213,7 @@ public class Fight_Intro_Cutscene : MonoBehaviour
             left_control_text.color = Color.Lerp(endColor, startColor, t / fadeInDuration);
             right_control_title.color = Color.Lerp(endColor, startColor, t / fadeInDuration);
             right_control_text.color = Color.Lerp(endColor, startColor, t / fadeInDuration);
+            intro_music.volume = Mathf.Lerp(startVolume, endVolume, t / fadeInDuration);
             yield return null;
         }
 

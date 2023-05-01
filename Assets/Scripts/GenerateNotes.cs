@@ -77,6 +77,11 @@ public class GenerateNotes : MonoBehaviour
         control3 = (KeyCode)PlayerPrefs.GetInt("Control3");
         control4 = (KeyCode)PlayerPrefs.GetInt("Control4");
 
+        if (PlayerPrefs.GetInt("Extreme_Active") == 1) {
+            speed *= 1.2f;
+            ReverseNoteSpeed *= 1.2f;
+        }
+
         //notes for the current song
         Vector2 Pos1 = new Vector2(-600f, 600f);
         Vector2 Pos2 = new Vector2(-200f, 1300f);
@@ -601,7 +606,14 @@ public class GenerateNotes : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         float playbackPosition = music.time;
-        music.pitch = -1.25f;
+        
+        if (PlayerPrefs.GetInt("Extreme_Active") == 1) {
+            music.pitch = (-1.25f * 1.2f);
+        }
+        else {
+            music.pitch = -1.25f;
+        }
+
         music.time = playbackPosition;
         music.Play();
 
@@ -663,7 +675,14 @@ public class GenerateNotes : MonoBehaviour
             isCurrentlyReversing = false;
             shouldMove = true;
             inMissAnimation = false;
-            music.pitch = 1f;
+
+            if (PlayerPrefs.GetInt("Extreme_Active") == 1) {
+                music.pitch = 1.2f;
+            }
+            else {
+                music.pitch = 1f;
+            }
+            
             music.Play();
         }
 
@@ -701,13 +720,26 @@ public class GenerateNotes : MonoBehaviour
             isCurrentlyReversing = false;
             shouldMove = true;
             inMissAnimation = false;
-            music.pitch = 1f;
+
+            if (PlayerPrefs.GetInt("Extreme_Active") == 1) {
+                music.pitch = 1.2f;
+            }
+            else {
+                music.pitch = 1f;
+            }
+
             music.Pause();
             UpdateCompletionPercentage();
             StartCoroutine(HitboxControlAnimation());
             StartCoroutine(HitboxTextAnimation());
 
-            yield return new WaitForSeconds(3.7f);
+            if (PlayerPrefs.GetInt("Extreme_Active") == 1) {
+                yield return new WaitForSeconds((3.7f / 1.2f));
+            }
+            else {
+                yield return new WaitForSeconds(3.7f);
+            }
+
             music.time = 0f;
             music.Play();
         }

@@ -17,6 +17,14 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void PreviousScene () {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    public void Previous_PreviousScene () {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
+    }
+
     public void SkipCutscene () {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
