@@ -92,7 +92,13 @@ public class RollCredits : MonoBehaviour
             else if (title.text == "Music")
             {
                 isShowingCredit = true;
+                StartCoroutine(ShowCredit("Playtesters", "Spencer Leff\nAnthony Flores"));
+            }
+            else if (title.text == "Playtesters")
+            {
+                isShowingCredit = true;
                 StartCoroutine(ShowCredit("Thanks for playing!", ""));
+
             }
             else if (title.text == "Thanks for playing!")
             {

@@ -37,7 +37,7 @@ public class Boss_Fight : MonoBehaviour
     private KeyCode right_control;
     private Color textColor = new Color(1f, 1f, 1f, 0.70588f);
     private bool initialization_items_done = false;
-    private float player_speed = 22f;
+    private float player_speed = 19f;
     private float player_hitbox = 100f;
     private float note_speed = 1300f;
     private bool gameOver = false;
@@ -150,17 +150,11 @@ public class Boss_Fight : MonoBehaviour
         right_control = (KeyCode)PlayerPrefs.GetInt("Control3");
 
         if (PlayerPrefs.GetInt("Extreme_Active") == 1) {
-            player_speed = 27f;
-            note_speed = 2000f;
-            note_difficulty_modifier = 0.8f;
+            player_speed = 26f;
+            note_speed = 2100f;
+            note_difficulty_modifier = 0.75f;
             music.pitch = 1.05f;
         }
-
-        //adjust player speed based on screen width
-        player_speed *= (Screen.width / 2560f);
-
-        //adjust note speed based on screen height
-        note_speed *= (Screen.height / 1440f);
     }
 
     void Update() {
@@ -220,6 +214,12 @@ public class Boss_Fight : MonoBehaviour
         float t = 0f;
         Vector2 startPos = witch.rectTransform.anchoredPosition;
         while (t < duration) {
+
+            //don't move witch while the pause menu is open
+            while (PlayerPrefs.GetInt("PauseActive") == 1) {
+                yield return null;
+            }
+
             t += Time.deltaTime;
             float normalizedTime = t / duration;
             Vector2 position = Vector2.Lerp(startPos, new Vector2(x, startPos.y), normalizedTime);
@@ -437,8 +437,8 @@ public class Boss_Fight : MonoBehaviour
 
     private IEnumerator WitchFleeAnimation() {
         Vector2 Witch_Original = witch.rectTransform.anchoredPosition;
-        Vector2 Witch_New = new Vector2(1500f, 700f);
-        float arc = 300f;
+        Vector2 Witch_New = new Vector2(1500f, 600f);
+        float arc = 100f;
 
         float duration = 1.25f;
         float t = 0f;
@@ -452,6 +452,8 @@ public class Boss_Fight : MonoBehaviour
             yield return null;
         }
         witch.rectTransform.anchoredPosition = Witch_New;
+
+        yield return new WaitForSeconds(0.5f);
 
         StartCoroutine(FrogGoesHome());
     }

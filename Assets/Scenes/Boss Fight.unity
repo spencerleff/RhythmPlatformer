@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 25398303}
   - component: {fileID: 25398302}
   - component: {fileID: 25398301}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: RetryButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 61667544}
   - component: {fileID: 61667545}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: GameOverSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -547,7 +547,7 @@ GameObject:
   - component: {fileID: 240737787}
   - component: {fileID: 240737786}
   - component: {fileID: 240737785}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ResumeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1179,7 +1179,7 @@ GameObject:
   - component: {fileID: 582028392}
   - component: {fileID: 582028391}
   - component: {fileID: 582028390}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: MenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1324,7 +1324,7 @@ GameObject:
   - component: {fileID: 584030263}
   - component: {fileID: 584030265}
   - component: {fileID: 584030264}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2694,7 +2694,7 @@ GameObject:
   - component: {fileID: 1012999809}
   - component: {fileID: 1012999811}
   - component: {fileID: 1012999810}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2829,7 +2829,7 @@ GameObject:
   - component: {fileID: 1033334137}
   - component: {fileID: 1033334139}
   - component: {fileID: 1033334138}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2964,7 +2964,7 @@ GameObject:
   - component: {fileID: 1037153745}
   - component: {fileID: 1037153747}
   - component: {fileID: 1037153746}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3598,7 +3598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1321871226}
   - component: {fileID: 1321871227}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: GameOverMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3654,7 +3654,7 @@ GameObject:
   - component: {fileID: 1335243925}
   - component: {fileID: 1335243927}
   - component: {fileID: 1335243926}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3727,7 +3727,7 @@ GameObject:
   - component: {fileID: 1443659997}
   - component: {fileID: 1443659999}
   - component: {fileID: 1443659998}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3863,7 +3863,7 @@ GameObject:
   - component: {fileID: 1457192301}
   - component: {fileID: 1457192300}
   - component: {fileID: 1457192299}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: MenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4008,7 +4008,7 @@ GameObject:
   - component: {fileID: 1470879468}
   - component: {fileID: 1470879470}
   - component: {fileID: 1470879469}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4081,7 +4081,7 @@ GameObject:
   - component: {fileID: 1521030250}
   - component: {fileID: 1521030252}
   - component: {fileID: 1521030251}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4216,7 +4216,7 @@ GameObject:
   - component: {fileID: 1551212885}
   - component: {fileID: 1551212887}
   - component: {fileID: 1551212886}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4351,7 +4351,7 @@ GameObject:
   - component: {fileID: 1557297879}
   - component: {fileID: 1557297881}
   - component: {fileID: 1557297880}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4427,7 +4427,7 @@ GameObject:
   - component: {fileID: 1661047925}
   - component: {fileID: 1661047928}
   - component: {fileID: 1661047929}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
