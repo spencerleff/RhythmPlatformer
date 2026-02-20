@@ -1,4 +1,4 @@
-This game was made with lots of love as my Senior Capstone Project.  It's a short story-based Rhymthm Platforming game that uses a few of my favorite songs. This was my first ever Unity project and I had a ton of fun building it throughout my final semester
+This game was made with lots of love as my Senior Capstone Project.  It's a short story-based Rhythm Platforming game that uses a few of my favorite songs. This was my first ever Unity project and I had a ton of fun building it throughout my final semester
 
 **To install the game:**
 
